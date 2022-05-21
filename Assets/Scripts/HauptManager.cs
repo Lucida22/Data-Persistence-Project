@@ -77,11 +77,13 @@ public class HauptManager : MonoBehaviour
 
     public void GameOver()
     {
+       
         m_GameOver = true;
         GameOverText.SetActive(true);
         if (tempHighscore > Manager.highscore)
         {
             Manager.highscore = tempHighscore;
-        }
+        } 
+        MainManager.Instance.SaveNameAndScore();
     }
 }

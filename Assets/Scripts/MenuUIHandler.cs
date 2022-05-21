@@ -12,6 +12,17 @@ using UnityEditor;
 public class MenuUIHandler : MonoBehaviour
 {
     public TMP_InputField NameField;
+    public MainManager Manager;
+
+    public void Start()
+    {
+        Manager = FindObjectOfType<MainManager>().GetComponent<MainManager>();
+        MainManager.Instance.LoadNameAndScore();
+        if(MainManager.Instance.YourName != " ")
+        {
+            NameField.text = Manager.YourName;
+        }
+    }
     public void StartGame()
     {
         SceneManager.LoadScene(1);
@@ -22,6 +33,7 @@ public class MenuUIHandler : MonoBehaviour
     }
     public void Exit()
     {
+        MainManager.Instance.SaveNameAndScore();
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else
